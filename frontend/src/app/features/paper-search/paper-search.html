@@ -1,0 +1,136 @@
+<div class="search-container">
+  <!-- Header / Search Inputs -->
+  <header class="search-header">
+    <h1>Science Digest</h1>
+    <p class="subtitle">Search millions of academic papers across multiple disciplines</p>
+
+    <div class="search-bar">
+      <input
+        type="text"
+        [ngModel]="searchQuery()"
+        (ngModelChange)="searchQuery.set($event)"
+        (keyup.enter)="onSearch()"
+        placeholder="Search by keyword, topic, or title..."
+        [disabled]="isLoading()"
+      />
+      <button (click)="onSearch()" [disabled]="isLoading() || !searchQuery().trim()">
+        @if (isLoading()) {
+          <span class="spinner"></span>
+        } @else {
+          Search
+        }
+      </button>
+    </div>
+
+    <!-- Multi-select Filter Chips -->
+    <div class="filter-section">
+      <span class="filter-label">Filter by Field of Study:</span>
+      <div class="chips-wrapper">
+        @for (field of availableFields(); track field) {
+          <button
+            type="button"
+            class="chip"
+            [class.selected]="selectedFields().includes(field)"
+            (click)="toggleFieldSelection(field)"
+          >
+            {{ field }}
+          </button>
+        }
+      </div>
+    </div>
+  </header>
+
+  <!-- Error Message -->
+  @if (errorMessage()) {
+    <div class="error-banner">
+      {{ errorMessage() }}
+    </div>
+  }
+
+  <!-- Main Content Area: Split View -->
+  <main class="content-layout">
+    <!-- Results List (SimplePaper) -->
+    <section class="results-list">
+      <h2>Results ({{ papers().length }})</h2>
+
+      @if (papers().length === 0 && !isLoading()) {
+        <div class="empty-state">
+          <p>No papers loaded. Enter a search query above to get started.</p>
+        </div>
+      }
+
+      @for (paper of papers(); track paper.paperId) {
+        <article
+          class="paper-card"
+          [class.active]="selectedPaper()?.paperId === paper.paperId"
+          (click)="selectPaper(paper.paperId)"
+        >
+          <h3 class="paper-title">{{ paper.title }}</h3>
+          
+          <div class="authors-list">
+            @for (author of paper.authors; track author.authorId; let last = $last) {
+              <span>{{ author.name }}{{ last ? '' : ', ' }}</span>
+            }
+          </div>
+
+          @if (paper.abstract) {
+            <p class="abstract-preview">{{ paper.abstract }}</p>
+          }
+        </article>
+      }
+    </section>
+
+    <!-- Detailed Single Paper Panel (Paper) -->
+    <aside class="detail-drawer">
+      @if (selectedPaper(); as paper) {
+        <div class="detail-card">
+          <header class="detail-header">
+            <h2>{{ paper.title }}</h2>
+            @if (paper.year) {
+              <span class="year-badge">{{ paper.year }}</span>
+            }
+          </header>
+
+          <div class="detail-meta">
+            @if (paper.venue) {
+              <p><strong>Venue:</strong> {{ paper.venue }}</p>
+            }
+          </div>
+
+          <div class="detail-authors">
+            <h4>Authors</h4>
+            <ul>
+              @for (author of paper.authors; track author.authorId) {
+                <li>{{ author.name }}</li>
+              }
+            </ul>
+          </div>
+
+          @if (paper.abstract) {
+            <div class="detail-abstract">
+              <h4>Abstract</h4>
+              <p>{{ paper.abstract }}</p>
+            </div>
+          }
+
+          <footer class="detail-actions">
+            @if (paper.pdfUrl) {
+              <a [href]="paper.pdfUrl" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                Download PDF
+              </a>
+            }
+            @if (paper.url) {
+              <a [href]="paper.url" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                View on Semantic Scholar
+              </a>
+            }
+          </footer>
+        </div>
+      } @else {
+        <div class="detail-placeholder">
+          <p>Select a paper from the list to view complete details.</p>
+        </div>
+      }
+    </aside>
+  </main>
+</div>

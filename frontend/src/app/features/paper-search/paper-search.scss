@@ -1,0 +1,300 @@
+.search-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1f2937;
+}
+
+.search-header {
+    margin-bottom: 2rem;
+
+    h1 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin: 0 0 0.5rem 0;
+        color: #111827;
+    }
+
+    .subtitle {
+        color: #6b7280;
+        margin: 0 0 1.5rem 0;
+    }
+}
+
+.search-bar {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+
+    input {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.5rem;
+        outline: none;
+        transition: border-color 0.2s;
+
+        &:focus {
+            border-color: #2563eb;
+        }
+    }
+
+    button {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #ffffff;
+        background-color: #2563eb;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover:not(:disabled) {
+            background-color: #1d4ed8;
+        }
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.filter-section {
+    .filter-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 0.5rem;
+    }
+
+    .chips-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .chip {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.875rem;
+        border-radius: 9999px;
+        border: 1px solid #e5e7eb;
+        background-color: #f9fafb;
+        color: #4b5563;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+            background-color: #f3f4f6;
+        }
+
+        &.selected {
+            background-color: #eff6ff;
+            border-color: #93c5fd;
+            color: #1d4ed8;
+            font-weight: 600;
+        }
+    }
+}
+
+.error-banner {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    border-radius: 0.5rem;
+}
+
+.content-layout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 2rem;
+
+    @media (max-width: 1024px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.results-list {
+    h2 {
+        font-size: 1.25rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    .empty-state {
+        padding: 3rem;
+        text-align: center;
+        color: #6b7280;
+        background: #f9fafb;
+        border-radius: 0.5rem;
+        border: 1px dashed #d1d5db;
+    }
+}
+
+.paper-card {
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:hover {
+        border-color: #cbd5e1;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    &.active {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+    }
+
+    .paper-title {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.125rem;
+        color: #111827;
+    }
+
+    .authors-list {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-bottom: 0.75rem;
+    }
+
+    .abstract-preview {
+        font-size: 0.875rem;
+        color: #4b5563;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin: 0;
+    }
+}
+
+.detail-drawer {
+    .detail-card {
+        position: sticky;
+        top: 2rem;
+        padding: 1.5rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.5rem;
+        background-color: #ffffff;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+        .detail-header {
+            margin-bottom: 1rem;
+
+            h2 {
+                font-size: 1.25rem;
+                margin: 0 0 0.5rem 0;
+            }
+
+            .year-badge {
+                display: inline-block;
+                padding: 0.25rem 0.5rem;
+                background: #f3f4f6;
+                border-radius: 0.25rem;
+                font-size: 0.75rem;
+                font-weight: 600;
+            }
+        }
+
+        .detail-meta {
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+
+            p {
+                margin: 0.25rem 0;
+            }
+
+            .oa-badge {
+                display: inline-block;
+                margin-top: 0.5rem;
+                padding: 0.25rem 0.5rem;
+                background-color: #dcfce7;
+                color: #15803d;
+                font-size: 0.75rem;
+                font-weight: 700;
+                border-radius: 0.25rem;
+            }
+        }
+
+        .detail-authors,
+        .detail-abstract {
+            margin-bottom: 1rem;
+
+            h4 {
+                margin: 0 0 0.5rem 0;
+                font-size: 0.875rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: #6b7280;
+            }
+
+            ul {
+                margin: 0;
+                padding-left: 1.25rem;
+                font-size: 0.875rem;
+            }
+
+            p {
+                font-size: 0.875rem;
+                line-height: 1.5;
+                color: #374151;
+                margin: 0;
+            }
+        }
+
+        .detail-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+
+            .btn {
+                display: block;
+                text-align: center;
+                padding: 0.625rem 1rem;
+                font-size: 0.875rem;
+                font-weight: 600;
+                border-radius: 0.375rem;
+                text-decoration: none;
+
+                &.btn-primary {
+                    background-color: #2563eb;
+                    color: #ffffff;
+
+                    &:hover {
+                        background-color: #1d4ed8;
+                    }
+                }
+
+                &.btn-secondary {
+                    background-color: #f3f4f6;
+                    color: #374151;
+
+                    &:hover {
+                        background-color: #e5e7eb;
+                    }
+                }
+            }
+        }
+    }
+
+    .detail-placeholder {
+        padding: 3rem 1.5rem;
+        text-align: center;
+        color: #9ca3af;
+        background: #fafafa;
+        border: 1px dashed #e5e7eb;
+        border-radius: 0.5rem;
+    }
+}

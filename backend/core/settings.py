@@ -37,10 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'papers.apps.PapersConfig',
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -116,3 +118,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Allowed origins for local development
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",  # Angular default dev server
+    "http://127.0.0.1:4200",
+]
+
+# Optional: Allow credentials (cookies/auth headers) if needed later
+CORS_ALLOW_CREDENTIALS = True
